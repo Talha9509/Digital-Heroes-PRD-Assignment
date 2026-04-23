@@ -12,14 +12,12 @@ Digital Heroes lets subscribers choose a monthly or yearly plan, enter their lat
 - React
 - Vite
 - React Router
-- Fetch API
-- Custom CSS / responsive UI
 
 ### Backend
 - Node.js
 - Express
 - Prisma ORM
-- PostgreSQL (Neon)
+- PostgreSQL
 - Stripe
 - JWT authentication
 - Multer for winner proof uploads
@@ -222,27 +220,4 @@ npm run dev
 }
 ```
 
-## Deployment Notes
 
-The PRD requires a live deployed website, a working user panel, a working admin panel, backend connectivity, and clean structured source code.[1] It also requires the project to be deployed using a new Vercel account and a new database project with properly configured environment variables.[1]
-
-## Testing Checklist
-
-- User signup and login work correctly.[1]
-- Monthly and yearly subscription checkout flows work.[1]
-- 5-score rolling logic behaves correctly.[1]
-- Duplicate score dates are blocked.[1]
-- Draw simulation and publish flows work correctly.[1]
-- Prize pool calculations and jackpot rollover are accurate.[1]
-- Charity selection and contribution percentages persist correctly.[1]
-- Winner proof upload, admin verification, and payout state updates work.[1]
-- User and admin dashboards are functional on mobile and desktop.[1]
-- Edge cases and error handling are covered.[1]
-
-## Future Scalability
-
-The PRD expects the architecture to support multi-country expansion, future team and corporate account models, a campaign module, and a codebase structure that can extend into a mobile app later.[1] The repository should therefore be kept modular, API-first, and easy to extend across new user types and product modules.[1]
-
-## Status
-
-This repository is intended to implement the full Digital Heroes trainee assignment from the provided PRD, including frontend, backend, payment flow, charity workflows, draw engine, and admin operations.[1]

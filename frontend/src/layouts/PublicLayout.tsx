@@ -1,6 +1,6 @@
 // src/layouts/PublicLayout.tsx
 import { Outlet, Link } from 'react-router-dom';
-import './layout.css';
+import './Layout.css';
 import { useAuth } from '../context/AuthContext';
 
 export default function PublicLayout() {
