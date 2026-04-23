@@ -1,0 +1,167 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  SUBSCRIBER
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  NONE
+  ACTIVE
+  PAST_DUE
+  CANCELED
+}
+
+enum WinnerVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+}
+
+enum MatchType {
+  MATCH_5
+  MATCH_4
+  MATCH_3
+}
+
+model User {
+  id                     String              @id @default(cuid())
+  email                  String              @unique
+  passwordHash           String
+  name                   String?
+  role                   Role                @default(SUBSCRIBER)
+
+  stripeCustomerId       String?
+  stripeSubscriptionId   String?
+  subscriptionStatus     SubscriptionStatus  @default(NONE)
+  subscriptionPlan       String?             // "monthly" or "yearly"
+  subscriptionCurrentPeriodEnd DateTime?
+
+  selectedCharityId      String?
+  selectedCharity        Charity?            @relation("UserCharity", fields: [selectedCharityId], references: [id])
+  charityContributionPct Int                 @default(10) // min 10%[file:1]
+
+  scores                 GolfScore[]
+  payments               Payment[]
+  winners                Winner[]
+    donations              Donation[] 
+
+  // proofUploads           WinnerProof[]
+
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+}
+
+model GolfScore {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  date      DateTime
+  score     Int      // 1–45 Stableford
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, date])  // Only one score per date per PRD.[file:1]
+}
+
+model Charity {
+  id              String         @id @default(cuid())
+  name            String
+  description     String
+  imageUrl        String?
+  websiteUrl      String?
+  upcomingEvents  CharityEvent[]
+  users           User[]         @relation("UserCharity")
+  donations       Donation[]
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model CharityEvent {
+  id          String   @id @default(cuid())
+  charity     Charity  @relation(fields: [charityId], references: [id])
+  charityId   String
+  title       String
+  description String?
+  date        DateTime
+}
+
+model Payment {
+  id                 String   @id @default(cuid())
+  user               User     @relation(fields: [userId], references: [id])
+  userId             String
+  amount             Int      // cents
+  currency           String   // e.g. "usd"
+  stripePaymentId    String   @unique
+  subscriptionPlan   String?
+  prizePoolShare     Int      // cents
+  charityShare       Int      // cents
+  createdAt          DateTime @default(now())
+}
+
+model Donation {
+  id              String   @id @default(cuid())
+  user            User?    @relation(fields: [userId], references: [id])
+  userId          String?
+  charity         Charity  @relation(fields: [charityId], references: [id])
+  charityId       String
+  amount          Int
+  currency        String
+  createdAt       DateTime @default(now())
+}
+
+model Draw {
+  id                String   @id @default(cuid())
+  year              Int
+  month             Int      // 1–12
+  drawnNumbers      Int[]    // 5 numbers (1–45)
+  isPublished       Boolean  @default(false)
+  isSimulation      Boolean  @default(false)
+  prizePoolTotal    Int      @default(0)  // cents allocated this month
+  jackpotPool       Int      @default(0)  // carries over if no 5-match winner[file:1]
+  createdAt         DateTime @default(now())
+  publishedAt       DateTime?
+
+  winners           Winner[]
+}
+
+model Winner {
+  id                  String                    @id @default(cuid())
+  user                User                      @relation(fields: [userId], references: [id])
+  userId              String
+  draw                Draw                      @relation(fields: [drawId], references: [id])
+  drawId              String
+  matchType           MatchType
+  prizeAmount         Int                       // cents
+  verificationStatus  WinnerVerificationStatus  @default(PENDING)
+  paymentStatus       PaymentStatus             @default(PENDING)
+  createdAt           DateTime                  @default(now())
+  
+
+  proofUpload         WinnerProof?
+}
+
+model WinnerProof {
+  id          String   @id @default(cuid())
+  winner      Winner   @relation(fields: [winnerId], references: [id])
+  winnerId    String   @unique
+  imageUrl    String
+  createdAt   DateTime @default(now())
+}

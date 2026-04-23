@@ -1,0 +1,117 @@
+:root {
+  --bg: #070711;
+  --bg-soft: #0f1118;
+  --bg-softer: #181a22;
+  --accent: #ff6a3d;
+  --accent-soft: rgba(255, 106, 61, 0.12);
+  --accent-alt: #4ab6aa;
+  --text: #f6f5ff;
+  --muted: #a1a4b7;
+  --border: #26293a;
+  --danger: #ff4b81;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #161827 0, #070711 60%);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.primary-button {
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #050509;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 14px 40px rgba(255, 106, 61, 0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s;
+}
+.primary-button:hover {
+  transform: translateY(-1px);
+  background: #ff835a;
+  box-shadow: 0 20px 60px rgba(255, 106, 61, 0.6);
+}
+
+.secondary-button {
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.secondary-button:hover {
+  background: var(--bg-softer);
+  color: var(--text);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.card {
+  background: var(--bg-soft);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  padding: 1.2rem 1.4rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.input-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.input-field {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-softer);
+  color: var(--text);
+  padding: 0.55rem 0.8rem;
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(255, 106, 61, 0.4);
+}
+
+.error-text {
+  color: var(--danger);
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+}

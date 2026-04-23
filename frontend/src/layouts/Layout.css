@@ -1,0 +1,99 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 4vw;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 11, 20, 0.9),
+    rgba(7, 7, 17, 0.8)
+  );
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  font-size: 1.15rem;
+}
+.logo span {
+  color: var(--accent);
+}
+
+.shell-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.shell-nav a {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.shell-nav a:hover {
+  color: var(--text);
+}
+
+.shell-main {
+  flex: 1;
+  padding: 2rem 4vw 3rem;
+}
+
+/* Dashboards */
+
+.dashboard-shell {
+  min-height: 100vh;
+  display: flex;
+}
+
+.sidebar {
+  width: 260px;
+  padding: 1.5rem 1.3rem;
+  border-right: 1px solid var(--border);
+  background: radial-gradient(circle at top left, #171829 0, #070711 55%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.sidebar-title {
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+.sidebar-email {
+  font-size: 0.85rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.sidebar-nav a {
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.sidebar-nav a:hover {
+  background: var(--bg-softer);
+  color: var(--text);
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 2rem 3vw;
+}

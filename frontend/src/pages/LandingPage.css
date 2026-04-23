@@ -1,0 +1,78 @@
+.landing-root {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.25rem, 3vw, 3.2rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.75rem;
+  color: var(--accent-alt);
+  margin-bottom: 0.6rem;
+}
+.hero-sub {
+  color: var(--muted);
+  max-width: 34rem;
+  font-size: 0.98rem;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+.secondary-link {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.secondary-link:hover {
+  color: var(--text);
+}
+.hero-footnote {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.hero-panel h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+.pill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.mini-grid {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+}
+.metric-label {
+  color: var(--muted);
+}
+.metric-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .landing-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
