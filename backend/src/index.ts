@@ -26,22 +26,22 @@ app.use(cors({
 }));
 
 // Stripe webhook needs raw body:
-app.use('/api/stripe/webhook', bodyParser.raw({ type: 'application/json' }));
+app.use('/stripe/webhook', bodyParser.raw({ type: 'application/json' }));
 
-app.use('/api/admin/users', userRouter);
+app.use('/admin/users', userRouter);
 
 app.use(express.json());
 app.use(cookieParser());
 
 // Routes
-app.use('/api/auth', authRouter);
-app.use('/api/subscription', subscriptionRouter);
-app.use('/api/scores', scoreRouter);
-app.use('/api/charities', charityRouter);
-app.use('/api/draws', drawRouter);
-app.use('/api/winners', winnerRouter);
-app.use('/api/admin', adminRouter);
-app.use('/api/stripe/webhook', stripeWebhookRouter);
+app.use('/auth', authRouter);
+app.use('/subscription', subscriptionRouter);
+app.use('/scores', scoreRouter);
+app.use('/charities', charityRouter);
+app.use('/draws', drawRouter);
+app.use('/winners', winnerRouter);
+app.use('/admin', adminRouter);
+app.use('/stripe/webhook', stripeWebhookRouter);
 
 // Error handler
 app.use(errorHandler);
